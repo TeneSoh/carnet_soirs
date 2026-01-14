@@ -4,6 +4,16 @@ from django.shortcuts import render
 def index(request):
     return render(request, "contact/contacts.html")
 
+
+def store(request):
+    pass
+
+def edit(request):
+    pass
+
+def delete(request):
+    pass
+
 # def add(a,b):
 #     return a + b
 
