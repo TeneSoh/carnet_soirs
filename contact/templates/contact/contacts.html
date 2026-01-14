@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... other head elements ... -->
+    <link href="{% static 'src/output.css' %}" rel="stylesheet">
+</head>
+<body>
+    {% block content %}
+    <h1 class="text-3xl font-bold underline text-blue-600">
+  Hello, Django with !
+</h1>
+<p class="mt-4 p-4 bg-gray-100 rounded shadow-md">
+  This text is styled with Tailwind utility classes.
+</p>
+
+{% endblock content %}
+   <!--   -->
+</body>
+</html>
