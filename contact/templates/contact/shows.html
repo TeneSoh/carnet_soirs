@@ -1,0 +1,32 @@
+{% extends "./layout/base.html" %}
+
+{% block content %}
+
+
+<div class="w-3xl sm:w-xl">
+
+      {% block title %}
+   <div class="text-4xl md:text-lg text-blue-300 bg-blue-950 flex rounded-2xl font-bold items-center mx-auto justify-center uppercase h-20 ">
+     <h1>
+        les informations du contact de {{contact.nom}}
+    </h1>
+   </div>
+{% endblock title %}
+    
+
+<div class="text-2xl p-6 rounded-2xl shadow-xl border-4 grid m-auto h-90  bg-blue-300 text-blue-950">
+   <div class="grid place-items-center border-b-black font-bold">
+      <p>{{contact.nom}} {{contact.prenom}}</p>
+      <ul class="text-justify">
+        <li>email : {{contact.email}}</li>
+        <li>pays : {{contact.pays}}</li>
+        <li>phone : {{contact.phone}}</li>
+        <li>ville : {{contact.ville}}</li>
+        <li>quartier : {{contact.quartier}}</li>
+        <li>rue : {{contact.rue}}</li>
+      </ul>
+   </div>   
+</div> 
+</div>
+{% endblock content %}
+    

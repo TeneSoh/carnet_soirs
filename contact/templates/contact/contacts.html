@@ -1,0 +1,43 @@
+{% extends "./layout/base.html" %}
+
+{% block content %}
+
+<div>
+    <p>Liste des contacts</p>
+</div>
+<table>
+    <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Prenom</th>
+            <th>Email</th>
+            <th>Pays</th>
+            <th>Phone</th>
+            <th>Ville</th>
+            <th>Quartier</th>
+            <th>Rue</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Tamo</td>
+            <td>Paul</td>
+            <td>paul@gmail.com</td>
+            <td>Cameroun</td>
+            <td>+237699227556</td>
+            <td>Douala</td>
+            <td>Adem</td>
+            <td>Rue</td>
+            <td>A-234</td>
+            <td>
+                <a href="#">Edit</a>
+                <a href="#">Show</a>
+                <a href="#">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+    
+{% endblock content %}
+    
