@@ -804,6 +804,10 @@ input:where([type='file']):focus {
   display: flex;
 }
 
+.table {
+  display: table;
+}
+
 .h-screen {
   height: 100vh;
 }

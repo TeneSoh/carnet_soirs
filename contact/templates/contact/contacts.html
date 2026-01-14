@@ -1,20 +1,41 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <!-- ... other head elements ... -->
-    <link href="{% static 'src/output.css' %}" rel="stylesheet">
-</head>
-<body>
-    {% block content %}
-    <h1 class="text-3xl font-bold underline text-blue-600">
-  Hello, Django with !
-</h1>
-<p class="mt-4 p-4 bg-gray-100 rounded shadow-md">
-  This text is styled with Tailwind utility classes.
-</p>
+{% extends './layout/base.html' %}
 
+{% block content %}
+    <div>
+        <p>
+            Liste des contacts
+        </p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom</th>
+                    <th>Prenom</th>
+                    <th>Email</th>
+                    <th>Pays</th>
+                    <th>Phone</th>
+                    <th>Ville</th>
+                    <th>Quartier</th>
+                    <th>Rue</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Tamo</td>
+                    <td>Paul</td>
+                    <td>paul@gmail.com</td>
+                    <td>Cameroun</td>
+                    <td>+237699227556</td>
+                    <td>Douala</td>
+                    <td>Adem</td>
+                    <td>A-234</td>
+                    <td>
+                        <a href="#">Edit</a>
+                        <a href="#">Show</a>
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 {% endblock content %}
-   <!--   -->
-</body>
-</html>
