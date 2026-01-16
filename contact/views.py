@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from django.template.context_processors import request
 from contact.models import Contact
 # Create your views here.
 def index(request):
