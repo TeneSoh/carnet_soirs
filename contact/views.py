@@ -5,9 +5,9 @@ from contact.models import Contact
 # Create your views here.
 def index(request):
     contacts = Contact.objects.all()
-    print(contacts)
-    for contact in contacts:
-        print(contact.nom)
+    # print(contacts)
+    # for contact in contacts:
+    #     print(contact.nom)
     return render(request, "contact/contacts.html", {"contacts":contacts})
 
 
@@ -46,7 +46,10 @@ def edit(request) :
     pass
 
 def delete(request, id:int) : 
-    pass
+    contact = Contact.objects.filter(id = id)
+    print(contact)
+    contact.delete()
+    return redirect('contact')
 
 # def add(a,b):
 #     return a + b
