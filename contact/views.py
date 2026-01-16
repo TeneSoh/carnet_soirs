@@ -48,3 +48,6 @@ def delete(request) :
 # a = 3
 # b = 8
 # add(a=a, b=b)
+
+def delate(request):
+    pass
