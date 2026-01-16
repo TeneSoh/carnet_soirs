@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from django.template.context_processors import request
 from contact.models import Contact
 # Create your views here.
 def index(request):
@@ -33,7 +34,8 @@ def store(request) :
         return redirect('contact')
 
 
-    return redirect('create_contact')
+    # return redirect('create_contact')
+    return render(request=request, template_name='contact/create_contact.html')
 
 
 def edit(request) : 
@@ -48,6 +50,3 @@ def delete(request) :
 # a = 3
 # b = 8
 # add(a=a, b=b)
-
-def delate(request):
-    pass
