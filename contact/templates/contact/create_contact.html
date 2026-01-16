@@ -71,9 +71,16 @@
                         
                     </div>
 
-                    <button class="bg-black mt-8 h-10 font-bold hover:bg-gray-800 text-white text-sm rounded-md w-full" type="submit">
-                        Sauvegarder
-                    </button>
+                    <div class="grid grid-cols-2 w-full gap-3">
+                        <button class=" col-span-1 bg-black mt-8 h-10 font-bold hover:bg-gray-800 text-white text-sm rounded-md w-full" type="submit">
+                            Sauvegarder
+                        </button>
+                        <a href="{% url 'contact' %}">
+                            <button class="bg-gray-400 col-span-1  mt-8 h-10 font-bold hover:bg-gray-600 text-white text-sm rounded-md w-full" type="button">
+                                Annuler
+                            </button>
+                        </a>
+                      </div>
                 
                 
                 </div>
