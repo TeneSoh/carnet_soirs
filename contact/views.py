@@ -6,8 +6,8 @@ def index(request):
     return render(request, "contact/contacts.html")
 
 
-def create(request) : 
-    return render(request , "contact/create_contact.html")
+# def create(request) : 
+#     return render(request , "contact/create_contact.html")
 
 def store(request) : 
     if(request.method == 'POST') : 
@@ -33,7 +33,7 @@ def store(request) :
         return redirect('contact')
 
 
-    return redirect('create_contact')
+    return render(request , "contact/create_contact.html")
 
 
 def edit(request) : 
