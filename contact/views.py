@@ -3,11 +3,15 @@ from django.contrib import messages
 from contact.models import Contact
 # Create your views here.
 def index(request):
-    return render(request, "contact/contacts.html")
+    contacts = Contact.objects.all()
+    print(contacts)
+    for contact in contacts:
+        print(contact.nom)
+    return render(request, "contact/contacts.html", {"contacts":contacts})
 
 
-def create(request) : 
-    return render(request , "contact/create_contact.html")
+# def create(request) : 
+#     return render(request , "contact/create_contact.html")
 
 def store(request) : 
     if(request.method == 'POST') : 
@@ -33,13 +37,14 @@ def store(request) :
         return redirect('contact')
 
 
-    return redirect('create_contact')
+    # return redirect('create_contact')
+    return render(request, 'contact/create_contact.html')
 
 
 def edit(request) : 
     pass
 
-def delete(request) : 
+def delete(request, id:int) : 
     pass
 
 # def add(a,b):

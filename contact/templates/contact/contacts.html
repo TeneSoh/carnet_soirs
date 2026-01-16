@@ -20,21 +20,24 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Tamo</td>
-                    <td>Paul</td>
-                    <td>paul@gmail.com</td>
-                    <td>Cameroun</td>
-                    <td>+237699227556</td>
-                    <td>Douala</td>
-                    <td>Adem</td>
-                    <td>A-234</td>
-                    <td>
-                        <a href="#">Edit</a>
-                        <a href="#">Show</a>
-                        <a href="#">Delete</a>
-                    </td>
-                </tr>
+                {% for item in contacts %}
+                
+                    <tr>
+                        <td>{{ item.nom }}</td>
+                        <td>{{ item.prenom }}</td>
+                        <td>{{ item.email }}</td>
+                        <td>{{ item.pays }}</td>
+                        <td>{{ item.phone }}</td>
+                        <td>{{ item.ville }}</td>
+                        <td>{{ item.quartier }}</td>
+                        <td>{{ item.rue }}</td>
+                        <td>
+                            <a href="#">Edit</a>
+                            <a href="#">Show</a>
+                            <a href="#">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
