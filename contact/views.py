@@ -1,16 +1,17 @@
 from django.shortcuts import redirect, render
 from django.contrib import messages
+from django.template.context_processors import request
 from contact.models import Contact
 # Create your views here.
 def index(request):
     return render(request, "contact/contacts.html")
 
 
-def create(request) : 
-    return render(request , "contact/create_contact.html")
+# def create(request) : 
+#     return render(request , "contact/create_contact.html")
 
 def store(request) : 
-    if(request.method == 'POST') : 
+    if (request.method == 'POST') : 
 
         nom = request.POST['nom']
         prenom = request.POST['prenom']
@@ -19,6 +20,7 @@ def store(request) :
         phone = request.POST['phone']
         ville = request.POST['ville']
         rue = request.POST['rue']
+        quartier = request.POST['quartier']
 
         Contact.objects.create(
             nom = nom,
@@ -28,12 +30,13 @@ def store(request) :
             phone = phone,
             ville = ville,
             rue = rue,
+            quartier = quartier,
         )
 
         return redirect('contact')
 
 
-    #return redirect('create_contact')
+    # return redirect('create_contact')
     return render(request=request, template_name='contact/create_contact.html')
 
 
