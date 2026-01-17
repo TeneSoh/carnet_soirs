@@ -994,6 +994,10 @@ input:where([type='file']):focus {
   max-width: 24rem;
 }
 
+.max-w-\[90\%\] {
+  max-width: 90%;
+}
+
 .table-auto {
   table-layout: auto;
 }

@@ -4,7 +4,8 @@ from django.template.context_processors import request
 from contact.models import Contact
 # Create your views here.
 def index(request):
-    return render(request, "contact/contacts.html")
+    Contacts = Contact.objects.all()
+    return render(request, "contact/contacts.html", {"contacts": Contacts})
 
 
 # def create(request) : 
@@ -43,8 +44,17 @@ def store(request) :
 def edit(request) : 
     pass
 
-def delete(request) : 
-    pass
+def delete(request, id:int) : 
+    try:
+        contact = Contact.objects.filter(id=id)
+        if not contact :
+            raise ValueError('Aucun contact trouve')
+        contact.delete()
+        return redirect('contact')
+    except ValueError as ve:
+        print(f"{ve}")
+    except Exception as e :
+        print(f"{e}")
 
 # def add(a,b):
 #     return a + b
