@@ -2,6 +2,7 @@ from django.shortcuts import redirect, render, get_object_or_404
 from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context_processors import request
+from django.http import Http404
 from contact.models import Contact
 # Create your views here.
 def index(request):

@@ -1,17 +1,22 @@
-{% extends "./layout/base.html  " %}
+{% extends './layout/base.html' %}
+
+
 
 {% block content %}
     <div>
         <p>{{contact.nom}}</p>
         <p>{{contact.prenom}}</p>
         <p>{{contact.email}}</p>
-        <p>{{contact.phone}}</p>
         <p>{{contact.pays}}</p>
+        <p>{{contact.phone}}</p>
+        <p>{{contact.phone}}</p>
         <p>{{contact.ville}}</p>
         <p>{{contact.quartier}}</p>
-        <p>{{contact.rue}}</p>
+        <p>{{contact.rue }}</p>
     </div>
+
     <div>
-        <a href= "{% url 'contact' %}"> To contact</a>
+        <a href="{% url 'contact' %}">rentrer a liste des contacts</a>
     </div>
-{% endblock content%}
+{% endblock content %}
+    
