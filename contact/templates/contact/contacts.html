@@ -1,0 +1,45 @@
+{% extends 'contact/layout/base.html' %}
+
+
+
+{% block content %}
+   {% comment %} Tableau d'information des contacts {% endcomment %}
+   
+   <div>
+    <h1 class="text-2xl font-bold mb-6">Liste des contacts</h1>
+    <table class="min-w-full bg-white border">
+        <thead>
+            <tr>
+                <th class="py-2 px-4 border-b">Nom</th>
+                <th class="py-2 px-4 border-b">Prénom</th>
+                <th class="py-2 px-4 border-b">Email</th>
+                <th class="py-2 px-4 border-b">Téléphone</th>
+                <th class="py-2 px-4 border-b">Pays</th>
+                <th class="py-2 px-4 border-b">Ville</th>
+                <th class="py-2 px-4 border-b">Quartier</th>
+                <th class="py-2 px-4 border-b">Rue</th>
+                <th class="py-2 px-4 border-b">Actions</th>
+
+            </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+            <tr>
+                <td class="py-2 px-4 border-b">{{ contact.name }}</td>
+                <td class="py-2 px-4 border-b">{{ contact.surname }}</td>
+                <td class="py-2 px-4 border-b">{{ contact.email }}</td>
+                <td class="py-2 px-4 border-b">{{ contact.tel }}</td>
+                <td class="py-2 px-4 border-b">{{ contact.country }}</td>
+                <td class="py-2 px-4 border-b">{{ contact.city }}</td>
+                <td class="py-2 px-4 border-b">{{ contact.quartier }}</td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="py-2 px-4 text-center">Aucun contact trouvé.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+   </div>
+{% endblock content %}
+    

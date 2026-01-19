@@ -61,7 +61,7 @@ ROOT_URLCONF = 'carnet.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'contact' / 'templates'/ 'contact'/ 'layout'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
