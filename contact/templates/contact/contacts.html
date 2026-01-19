@@ -1,7 +1,7 @@
 {% extends './layout/base.html' %}
 
 {% block content %}
-    <div>
+    <div class="py-8">
         <p>
             Liste des contacts
         </p>
@@ -20,24 +20,27 @@
                 </tr>
             </thead>
             <tbody>
-                {% for item in contacts %}
                 
+                {% for contact in contacts  %}
                     <tr>
-                        <td>{{ item.nom }}</td>
-                        <td>{{ item.prenom }}</td>
-                        <td>{{ item.email }}</td>
-                        <td>{{ item.pays }}</td>
-                        <td>{{ item.phone }}</td>
-                        <td>{{ item.ville }}</td>
-                        <td>{{ item.quartier }}</td>
-                        <td>{{ item.rue }}</td>
+                        <td>{{contact.nom}}</td>
+                        <td>{{contact.prenom}}</td>
+                        <td>{{contact.email}}</td>
+                        <td>{{contact.pays}}</td>
+                        <td>{{contact.phone}}</td>
+                        <td>{{contact.phone}}</td>
+                        <td>{{contact.ville}}</td>
+                        <td>{{contact.quartier}}</td>
+                        <td>{{contact.rue }}</td>
                         <td>
-                            <a href="#">Edit</a>
-                            <a href="#">Show</a>
-                            <a href="{% url 'delete_contact' item.id %}">Delete</a>
+                            <a href="{% url 'edit_contact' contact.id %}">Edit</a>
+                            <a href="{% url 'show_contact'  contact.id %}">Show</a>
+                            <a href="{% url 'delete_contact' contact.id %}">Delete</a>
                         </td>
                     </tr>
                 {% endfor %}
+                    
+                
             </tbody>
         </table>
     </div>

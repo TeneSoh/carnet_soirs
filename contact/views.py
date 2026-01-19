@@ -1,14 +1,12 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.template.context_processors import request
+from django.http import Http404
 from contact.models import Contact
 # Create your views here.
 def index(request):
     contacts = Contact.objects.all()
-    # print(contacts)
-    # for contact in contacts:
-    #     print(contact.nom)
-    return render(request, "contact/contacts.html", {"contacts":contacts})
+    return render(request, "contact/contacts.html" , {'contacts' : contacts})
 
 
 # def create(request) : 
@@ -44,18 +42,69 @@ def store(request) :
     return render(request, 'contact/create_contact.html')
 
 
-def edit(request) : 
-    pass
+def edit(request , id:int) : 
+    contact = get_object_or_404(Contact , id = id)
 
-def delete(request, id:int) : 
-    contact = Contact.objects.filter(id = id)
-    print(contact)
-    contact.delete()
-    return redirect('contact')
+    if (request.method == 'POST') : 
 
-# def add(a,b):
-#     return a + b
+        nom = request.POST['nom']
+        prenom = request.POST['prenom']
+        email = request.POST['email']
+        pays = request.POST['pays']
+        phone = request.POST['phone']
+        ville = request.POST['ville']
+        rue = request.POST['rue']
+        quartier = request.POST['quartier']
 
-# a = 3
-# b = 8
-# add(a=a, b=b)
+        Contact.objects.filter(id=id).update(
+            nom = nom,
+            prenom = prenom,
+            email = email,
+            pays = pays,
+            phone = phone,
+            ville = ville,
+            rue = rue,
+            quartier = quartier,
+        )
+        # contact.nom = nom
+        # contact.prenom = prenom
+        # contact.email = email
+        # contact.pays = pays
+        # contact.phone = phone
+        # contact.ville = ville
+        # contact.rue = rue
+        # contact.quartier = quartier
+
+        # contact.save()
+
+        return redirect('contact')
+
+    return render (request , "contact/edit_contact.html" , {'contact' : contact})
+
+
+
+
+
+def delete(request , id:int) : 
+    try : 
+        contact = Contact.objects.filter(id = id)
+        # contact = Contact.objects.get(id=id)
+        
+        if not contact : 
+            raise ValueError("Aucune contact trouvé")
+
+        contact.delete()
+
+        return redirect("contact")
+
+    except Contact.DoesNotExist : 
+        raise Http404("Pas de contact trouvé")
+
+
+
+def show(request , id) : 
+
+        contact = get_object_or_404(Contact , id = id) #avec ceci pas besoin de mettre des try... except
+
+        return render(request , 'contact/show.html' , {'contact' : contact})
+
