@@ -9,27 +9,28 @@
     <title>Contact</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <div>
+    <header class="text-white bg-gray-800">
+        <nav class="flex items-center justify-between px-4 py-4 mx-auto max-w-7xl">
+            <div class="text-xl font-bold">
                 logo
             </div>
-            <ul>
-                <li><a href="#">Creer un contact</a></li>
-                <li><a href="#">Deconnexion</a></li>
+            <ul class="flex space-x-6">
+                <li><a href="{% url 'store_contact' %}"class="hover:text-gray-400">Creer un contact</a></li>
+                <li><a href="#"class="hover:text-gray-400">Deconnexion</a></li>
             </ul>
             <div>
-                <p>Name</p>
+                <p class="text-sm">Name</p>
             </div>
         </nav>
     </header>
-    <main>
+    <main class="">
         {% block content %}
         {% endblock content %}
     </main>
-    <footer>
-        <p>Design by ...</p>
-        <p> CopyRight &copy; 2026 </p>
+    <footer class="py-4 text-center text-white bg-gray-800">
+        <p class="text-sm">Design by ...</p>
+        <p class="text-sm"> CopyRight &copy; 2026 </p>
     </footer>
 </body>
 </html>
+
