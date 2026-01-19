@@ -25,7 +25,7 @@
 
             
 
-            <form action="{% url 'store_contact' %}" id="formLoginPage" method="POST" 
+            <form action="{% url 'edit_contact' contact.id %} " id="formLoginPage" method="POST" 
                 class="flex  shadow-2xl rounded-2xl w-[40%] min-h-[60%] relative overflow-hidden transition-all  duration-2000 ease-linear"
             >
             
@@ -39,47 +39,47 @@
 
                 <div class="p-16 w-full">
                     <div class=" flex flex-col items-start w-full  justify-center">
-                        <h1 class="font-bold text-3xl text-right mb-5">Créer un contact</h1>
+                        <h1 class="font-bold text-3xl text-right mb-5">Editer ce contact</h1>
 
                         <div class="grid grid-cols-2 w-full gap-3">
                             <div class="grid col-span-1 w-full mt-5">
                                 <label class="text-[13px] font-bold mb-1.5" for="">Nom</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="nom" placeholder="Entrer votre nom">
+                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="nom" value="{{contact.nom}}" placeholder="Entrer votre nom">
                             </div>
                             <div class="grid col-span-1 w-full mt-5">
                                 <label class="text-[13px] font-bold mb-1.5" for="">Prenom</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="prenom" placeholder="Entrer votre prenom">
+                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="prenom" value="{{contact.prenom}}" placeholder="Entrer votre prenom">
                             </div>
                         </div>
 
                         <div class="grid grid-cols-2 w-full gap-3">
                             <div class="grid col-span-1 w-full mt-5">
                                 <label class="text-[13px] font-bold mb-1.5" for="">Email</label>
-                                <input type="email" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="email" placeholder="Entrer votre email">
+                                <input type="email" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="email" value="{{contact.email}}" placeholder="Entrer votre email">
                             </div>
                             <div class="grid col-span-1 w-full mt-5">
                                 <label class="text-[13px] font-bold mb-1.5" for="">Pays</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="pays" placeholder="Entrer votre pays">
+                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="pays" value="{{contact.pays}}" placeholder="Entrer votre pays">
                             </div>
                         </div>
                         <div class="grid grid-cols-2 w-full gap-3">
                             <div class="grid col-span-1 w-full mt-5">
                                 <label class="text-[13px] font-bold mb-1.5" for="">phone</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="phone" placeholder="Entrer votre phone">
+                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="phone" value="{{contact.phone}}" placeholder="Entrer votre phone">
                             </div>
                             <div class="grid col-span-1 w-full mt-5">
                                 <label class="text-[13px] font-bold mb-1.5" for="">Ville</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="ville" placeholder="Entrer votre ville">
+                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="ville" value="{{contact.ville}}" placeholder="Entrer votre ville">
                             </div>
                         </div>
                         <div class="grid grid-cols-2 w-full gap-3">
                             <div class="grid col-span-1 w-full mt-5">
                                 <label class="text-[13px] font-bold mb-1.5" for="">rue</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="rue" placeholder="Entrer votre rue">
+                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="rue" value="{{contact.rue}}" placeholder="Entrer votre rue">
                             </div>
                             <div class="grid col-span-1 w-full mt-5">
                                 <label class="text-[13px] font-bold mb-1.5" for="">Quartier</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="quartier" placeholder="Entrer votre quartier">
+                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="quartier" value="{{contact.quartier}}" placeholder="Entrer votre quartier">
                             </div>
                             
                         </div>
