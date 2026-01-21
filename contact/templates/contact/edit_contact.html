@@ -43,8 +43,9 @@
 
                         <div class="grid grid-cols-2 w-full gap-3">
                             <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">Nom</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="nom" value="{{contact.nom}}" placeholder="Entrer votre nom">
+                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.nom.label_tag}}</label>
+                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="nom" value="{{contact.nom}}" placeholder="Entrer votre nom"> {% endcomment %}
+                                {{form.nom}}
                             </div>
                             <div class="grid col-span-1 w-full mt-5">
                                 <label class="text-[13px] font-bold mb-1.5" for="">Prenom</label>
