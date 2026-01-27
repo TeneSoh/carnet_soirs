@@ -11,4 +11,4 @@ class Contact(models.Model):
     phone = models.CharField(max_length=255, null=False, blank=False)
     ville = models.CharField(max_length=255, null=False, blank=False)
     quartier = models.CharField(max_length=255, null=False, blank=False)
-    rue = models.CharField(max_length=255, null=False, blank=False)
+    rue = models.CharField(max_length=255, null=False, blank=False) 
