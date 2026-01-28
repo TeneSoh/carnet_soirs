@@ -5,7 +5,8 @@ from django.template.context_processors import request
 from django.http import Http404
 from contact.models import Contact
 from .forms import ContactForm
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
+from django.views import View
 from django.urls import reverse_lazy
 
 # Using class Views
@@ -16,11 +17,19 @@ from django.urls import reverse_lazy
 #     return render(request, "contact/contacts.html", {"contacts": contacts})
 
 
-class ListContact(ListView):
-    model = Contact
-    template_name = "contact/contacts.html"
-    context_object_name = "contacts"
+# class ListContact(ListView):
+#     model = Contact
+#     template_name = "contact/contacts.html"
+#     context_object_name = "contacts"
 
+class ListContact(View):
+   def get(self, request):
+        contacts = Contact.objects.all()
+        return render(request, "contact/contacts.html", {"contacts": contacts})
+
+   
+#    def post(self, request):
+#        pass
 
 
 # def create(request) :
@@ -69,73 +78,98 @@ class ListContact(ListView):
 #     return render(request, "contact/create_contact.html", {"form": form})
 
 
-class CreateContactView(CreateView):
-    model = Contact
-    form_class = ContactForm
-    template_name = "contact/create_contact.html"
-    success_url = reverse_lazy('contact')
+# class CreateContactView(CreateView):
+#     model = Contact
+#     form_class = ContactForm
+#     template_name = "contact/create_contact.html"
+#     success_url = reverse_lazy('contact')
 
-    def get_context_data(self, **kwargs) -> dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["form"] = ContactForm()
-        return context
-    
+#     def get_context_data(self, **kwargs) -> dict[str, Any]:
+#         context = super().get_context_data(**kwargs)
+#         context["form"] = ContactForm()
+#         return context
+class CreateContactView(View):
+    def get(self, request):
+        form = ContactForm()
+        return render(request, "contact/create_contact.html", {"form": form})
 
-def edit(request, id: int):
-
-    contact = get_object_or_404(Contact, id=id)
-
-    if request.method == "POST":
-        # form = ContactForm(request.POST)
-        form = ContactForm(request.POST, instance=contact)
+    def post(self, request):
+        form = ContactForm(request.POST)
         if form.is_valid():
-
-            # nom = request.POST["nom"]
-            # prenom = request.POST["prenom"]
-            # email = request.POST["email"]
-            # pays = request.POST["pays"]
-            # phone = request.POST["phone"]
-            # ville = request.POST["ville"]
-            # rue = request.POST["rue"]
-            # quartier = request.POST["quartier"]
-
-            # Contact.objects.filter(id=id).update(
-            #     nom=nom,
-            #     prenom=prenom,
-            #     email=email,
-            #     pays=pays,
-            #     phone=phone,
-            #     ville=ville,
-            #     rue=rue,
-            #     quartier=quartier,
-            # )
-            # contact.nom = nom
-            # contact.prenom = prenom
-            # contact.email = email
-            # contact.pays = pays
-            # contact.phone = phone
-            # contact.ville = ville
-            # contact.rue = rue
-            # contact.quartier = quartier
-
-            # contact.save()
             form.save()
             return redirect("contact")
+        
+        return render(request, "contact/create_contact.html", {"form": form})
 
-    # form = ContactForm(initial={
-    #     "nom": contact.nom, 
-    #     "prenom": contact.prenom,
-    #     "email" : contact.email,
-    #     "pays" : contact.pays,
-    #     "phone" : contact.phone,
-    #     "ville" : contact.ville,
-    #     "rue" : contact.email,
-    #     "quartier" : contact.quartier,
-    # })
-    form = ContactForm(instance=contact)
-    return render(
-        request, "contact/edit_contact.html", {"contact": contact, "form": form}
-    )
+
+# def edit(request, id: int):
+
+#     contact = get_object_or_404(Contact, id=id)
+
+#     if request.method == "POST":
+#         # form = ContactForm(request.POST)
+#         form = ContactForm(request.POST, instance=contact)
+#         if form.is_valid():
+
+#             # nom = request.POST["nom"]
+#             # prenom = request.POST["prenom"]
+#             # email = request.POST["email"]
+#             # pays = request.POST["pays"]
+#             # phone = request.POST["phone"]
+#             # ville = request.POST["ville"]
+#             # rue = request.POST["rue"]
+#             # quartier = request.POST["quartier"]
+
+#             # Contact.objects.filter(id=id).update(
+#             #     nom=nom,
+#             #     prenom=prenom,
+#             #     email=email,
+#             #     pays=pays,
+#             #     phone=phone,
+#             #     ville=ville,
+#             #     rue=rue,
+#             #     quartier=quartier,
+#             # )
+#             # contact.nom = nom
+#             # contact.prenom = prenom
+#             # contact.email = email
+#             # contact.pays = pays
+#             # contact.phone = phone
+#             # contact.ville = ville
+#             # contact.rue = rue
+#             # contact.quartier = quartier
+
+#             # contact.save()
+#             form.save()
+#             return redirect("contact")
+
+#     # form = ContactForm(initial={
+#     #     "nom": contact.nom, 
+#     #     "prenom": contact.prenom,
+#     #     "email" : contact.email,
+#     #     "pays" : contact.pays,
+#     #     "phone" : contact.phone,
+#     #     "ville" : contact.ville,
+#     #     "rue" : contact.email,
+#     #     "quartier" : contact.quartier,
+#     # })
+#     form = ContactForm(instance=contact)
+#     return render(
+#         request, "contact/edit_contact.html", {"contact": contact, "form": form}
+#     )
+
+
+class UpdateContactView(UpdateView):
+    model = Contact
+    form_class = ContactForm
+    template_name = "contact/edit_contact.html"
+    success_url = reverse_lazy('contact')
+    context_object_name = "contact"
+    
+    # def get_context_data(self, **kwargs: Any) -> dict[str, Any]:
+    #     context = super().get_context_data(**kwargs)
+    #     context['form'] = ContactForm(instance=contact)
+    #     return context
 
 
 # def delete(request, id: int):
@@ -159,12 +193,33 @@ class DeleteContactView(DeleteView):
     # template_name = "contact/contact_confirm_delete.html"
     success_url = reverse_lazy('contact')
 
+# class DeleteContactView(View):
+#     def get(self, request, pk:int):
+#         try:
+#             contact = Contact.objects.filter(id=pk)
+#             # contact = Contact.objects.get(id=id)
+
+#             if not contact:
+#                 raise ValueError("Aucune contact trouvé")
+
+#             contact.delete()
+
+#             return redirect("contact")
+
+#         except Contact.DoesNotExist:
+#             raise Http404("Pas de contact trouvé")
 
 
-def show(request, id):
+# def show(request, id):
 
-    contact = get_object_or_404(
-        Contact, id=id
-    )  # avec ceci pas besoin de mettre des try... except
+#     contact = get_object_or_404(
+#         Contact, id=id
+#     )  # avec ceci pas besoin de mettre des try... except
 
-    return render(request, "contact/show.html", {"contact": contact})
+#     return render(request, "contact/show.html", {"contact": contact})
+
+
+class DetailContactView(DetailView):
+    model = Contact
+    template_name = "contact/show.html"
+    context_object_name = 'contact'

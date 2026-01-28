@@ -1,3 +1,4 @@
+from django.forms import ValidationError
 from django import forms
 from .models import Contact
 
@@ -72,7 +73,7 @@ class ContactForm(forms.ModelForm):
                     "id":"prenom"
                 }
             ),
-            "email":forms.TextInput(
+            "email":forms.EmailInput(
                 attrs={
                     "class":"email",
                     "id":"email"
@@ -109,3 +110,9 @@ class ContactForm(forms.ModelForm):
                 }
             ),
         }
+
+    def clean_nom(self):
+        nom = self.cleaned_data["nom"]
+        if nom and len(nom) < 2:
+            raise ValidationError(message="le nom doit etre supperieur a 2")
+        return nom

@@ -44,6 +44,9 @@
               /> {% endcomment %}
               {{form.nom}}
             </div>
+            {% if form.nom.errors %}
+              <p>{{form.nom.errors}}</p>
+            {% endif %}
             <div class="grid col-span-1 w-full mt-5">
               <label class="text-[13px] font-bold mb-1.5" for="">{{form.prenom.label_tag}}</label>
               {% comment %} <input
@@ -67,6 +70,11 @@
               /> {% endcomment %}
               {{form.email}}
             </div>
+            
+            {% if form.email.errors %}
+              <p>{{form.email.errors}}</p>
+            {% endif %}
+              
             <div class="grid col-span-1 w-full mt-5">
               <label class="text-[13px] font-bold mb-1.5" for="">{{form.pays.label_tag}}</label>
               {% comment %} <input
@@ -78,6 +86,9 @@
               {{form.pays}}
             </div>
           </div>
+          {% if form.pays.errors %}
+              <p>{{form.pays.errors}}</p>
+            {% endif %}
           <div class="grid grid-cols-2 w-full gap-3">
             <div class="grid col-span-1 w-full mt-5">
               <label class="text-[13px] font-bold mb-1.5" for="">{{form.phone.label_tag}}</label>
@@ -89,6 +100,9 @@
               /> {% endcomment %}
               {{form.phone}}
             </div>
+            {% if form.phone.errors %}
+              <p>{{form.phone.errors}}</p>
+            {% endif %}
             <div class="grid col-span-1 w-full mt-5">
               <label class="text-[13px] font-bold mb-1.5" for="">{{form.ville.label_tag}}</label>
               {% comment %} <input
