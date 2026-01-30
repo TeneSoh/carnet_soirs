@@ -1,8 +1,10 @@
 from typing import Any
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context_processors import request
 from django.http import Http404
+#from django.views import view
 from contact.models import Contact
 from .forms import ContactForm
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView, DetailView
@@ -12,24 +14,18 @@ from django.urls import reverse_lazy
 # Using class Views
 
 # Create your views here.
-# def index(request):
-#     contacts = Contact.objects.all()
-#     return render(request, "contact/contacts.html", {"contacts": contacts})
-
-
-# class ListContact(ListView):
-#     model = Contact
-#     template_name = "contact/contacts.html"
-#     context_object_name = "contacts"
-
-class ListContact(View):
-   def get(self, request):
-        contacts = Contact.objects.all()
-        return render(request, "contact/contacts.html", {"contacts": contacts})
-
-   
-#    def post(self, request):
-#        pass
+def index(request):
+    Contacts = Contact.objects.all().order_by('-id')
+    
+    
+    # ---- Pagination -----
+    #items = Contact.objects.all().order_by('id') # Get all items
+    paginator = Paginator(Contacts, 500) # 10 items per page
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number) # Get page object for current page
+    
+    
+    return render(request, "contact/contacts.html", {"contacts": Contacts,  'page_obj': page_obj })
 
 
 # def create(request) :

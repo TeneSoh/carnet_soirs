@@ -1,7 +1,9 @@
 {% extends './layout/base.html' %}
 
 {% block content %}
-    <div class="py-8">
+
+<!-- component
+<div>
         <p>
             Liste des contacts
         </p>
@@ -20,27 +22,216 @@
                 </tr>
             </thead>
             <tbody>
-                
-                {% for contact in contacts  %}
-                    <tr>
-                        <td>{{contact.nom}}</td>
-                        <td>{{contact.prenom}}</td>
-                        <td>{{contact.email}}</td>
-                        <td>{{contact.pays}}</td>
-                        <td>{{contact.phone}}</td>
-                        <td>{{contact.ville}}</td>
-                        <td>{{contact.quartier}}</td>
-                        <td>{{contact.rue }}</td>
-                        <td>
-                            <a href="{% url 'edit_contact' contact.id %}">Edit</a>
-                            <a href="{% url 'show_contact'  contact.id %}">Show</a>
-                            <a href="{% url 'delete_contact' contact.id %}">Delete</a>
+                <tr>
+                    <td>Tamo</td>
+                    <td>Paul</td>
+                    <td>paul@gmail.com</td>
+                    <td>Cameroun</td>
+                    <td>+237699227556</td>
+                    <td>Douala</td>
+                    <td>Adem</td>
+                    <td>A-234</td>
+                    <td>
+                        <a href="#">Edit</a>
+                        <a href="#">Show</a>
+                        <a href="#">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    -->    
+
+
+<div class="max-w-[90%] mx-auto">
+
+<!-- component     
+     <div class="block mb-4 mx-auto border-b border-slate-300 pb-2 max-w-[360px]">
+        <a target='_blank' href='https://www.material-tailwind.com/docs/html/table' class='block w-full px-4 py-2 text-center text-slate-700 transition-all '>
+                More components on <b>Material Tailwind</b>.
+            </a>
+    </div>
+-->
+    <div class="w-full flex justify-between items-center mb-3 mt-1 pl-3">
+        <div>
+
+            <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-bold text-white bg-gray-400 border border-slate-800 rounded hover:bg-slate-600 hover:border-slate-600 transition duration-200 ease">
+                    <a href="{% url 'store_contact' %}"class="hover:text-gray-400">Creer un contact</a>
+            </button>
+
+        </div>
+        <div class="ml-3">
+            <div class="w-full max-w-sm min-w-[200px] relative">
+                <div class="relative">
+                    <input
+                    class="bg-white w-full pr-11 h-10 pl-3 py-2 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+                    placeholder="Search for invoice..."
+                    id="myInput"
+                    onkeyup="myFunction()"
+                    />
+
+                    <button
+                    class="absolute h-8 w-8 right-1 top-1 my-auto px-2 flex items-center bg-white rounded "
+                    type="button"
+                    >
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8 text-slate-600">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                    </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+        <table id="myTable" class="p-4 border border-slate-300 w-full text-left table-auto min-w-max">
+            <thead >
+                <tr class="border border-slate-300 bg-slate-100">
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Nom
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Prenom
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Email
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Pays
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Phone
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Ville
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Quartier
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Rue
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Actions
+                    </p>
+                    </th>
+                </tr>
+            </thead>            
+            <tbody>
+                {% for contact in page_obj %}
+                    <tr class="hover:bg-slate-50 border-b border-slate-300">
+                        <td class="p-4 py-5">
+                        <p class="block font-semibold text-sm text-slate-800">{{contact.nom}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="block font-semibold text-sm text-slate-800">{{contact.prenom}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.email}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.pays}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.phone}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.ville}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.quartier}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.rue}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">
+                                    <a href="{% url 'edit_contact' contact.id %}">Edit</a>
+                                    <a href="{% url 'show_contact' contact.id %}">Show</a>
+                                    <a href="{% url 'delete_contact' contact.id %}">Delete</a>
+                        </p>
                         </td>
                     </tr>
                 {% endfor %}
-                    
-                
             </tbody>
         </table>
+        
     </div>
+    
+
+
+        
+
+               <!-- Barre de Pagination -->
+        <div class="flex items-center justify-between p-4 bg-white border-t border-gray-200" aria-label="Table navigation">
+            <span class="text-sm font-normal text-gray-500">
+                Affichage (de <span class="font-semibold text-gray-900">{{ page_obj.start_index }} - {{ page_obj.end_index }}</span> sur <span class="font-semibold text-gray-900">{{ page_obj.paginator.count }}</span>) -  (Page <span class="font-semibold text-gray-900">{{page_obj.number}}</span> de <span class="font-semibold text-gray-900">{{page_obj.paginator.num_pages}}</span>)
+            </span>
+            <ul class="inline-flex items-center -space-x-px">
+                {% if page_obj.has_previous %}
+                <li>
+                    <a href="?page=1" class="block  ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700">
+                        <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                            Prem
+                        </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="block ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700">
+                        <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                            Prec
+                        </button>
+                    </a>
+                </li>            
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <li>
+                        <span class="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 font-bold">{{ num }}</span>
+                    </li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <li>
+                        <a href="?page={{ num }}" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">{{ num }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li>
+                    <a href="?page={{ page_obj.next_page_number }}" class="block leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700">
+                        <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                            Suiv
+                        </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="block  leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700">
+                        <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                            Fin
+                        </button>
+                    </a>
+                </li>            
+                {% endif %}
+            </ul>
+        </div>
+
+</div>
+
 {% endblock content %}
