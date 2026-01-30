@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context_processors import request
 from django.http import Http404
+#from django.views import view
 from contact.models import Contact
 # Create your views here.
 def index(request):
@@ -11,7 +12,7 @@ def index(request):
     
     # ---- Pagination -----
     #items = Contact.objects.all().order_by('id') # Get all items
-    paginator = Paginator(Contacts, 10) # 10 items per page
+    paginator = Paginator(Contacts, 500) # 10 items per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number) # Get page object for current page
     
