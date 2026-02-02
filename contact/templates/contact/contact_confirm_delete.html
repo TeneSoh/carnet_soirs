@@ -1,11 +1,9 @@
 {% extends './layout/base.html' %}
 
-
 {% block content %}
-    <form action="" method="post">
+    <form method="post">
         {% csrf_token %}
-        <button type="submit">confirm</button>
+        <button type="submit">Confirm</button>
     </form>
-
-    <a href="{% url 'contact' %}">annuler</a>
-{% endblock content %}
+    <a href="{% url 'contact' %}"> annuler</a>
+{% endblock %}

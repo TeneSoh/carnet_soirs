@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
 TAILWIND_APP_NAME = 'theme'
 
+#NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'
 NPM_BIN_PATH = "C:/nvm4w/nodejs/npm.cmd"
 
 MIDDLEWARE = [

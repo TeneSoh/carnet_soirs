@@ -1,147 +1,164 @@
-{% extends './layout/base.html' %}
-{% comment %} {% load static tailwind_tags %}
+{% extends './layout/base.html' %}  
 
-<!doctype html>
-<html>
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="./assets/css/output.css" rel="stylesheet">
-  <link rel="stylesheet" href="./assets/fontawesome/css/all.css">
-  {% tailwind_css %}
-  
-</head> {% endcomment %}
+{% block content %}
 
+  <main
+    class="flex items-center justify-center bg-gradient-to-r from-gray-50 to-gray-200 h-screen font-poppins"
+  >
+    <form
+      action="{% url 'store_contact' %}"
+      id="formLoginPage"
+      method="POST"
+      class="flex shadow-2xl rounded-2xl w-[40%] min-h-[60%] relative overflow-hidden transition-all duration-2000 ease-linear"
+    >
+      {% csrf_token %}
 
+      <div
+        class="custom-shape-divider-bottom-1765470033 absolute top-0 left-0 w-full overflow-hidden"
+      >
+        <svg
+          data-name="Layer 1"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+        >
+          <path
+            d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
+            class="relative block fill-black"
+          ></path>
+        </svg>
+      </div>
 
+      <div class="p-16 w-full">
+        <div class="flex flex-col items-start w-full justify-center">
+          <h1 class="font-bold text-3xl text-right mb-5">Créer un contact</h1>
 
-    
-    {% block content %}
-        
+          <div class="grid grid-cols-2 w-full gap-3">
+            <div class="grid col-span-1 w-full mt-5">
+              <label class="text-[13px] font-bold mb-1.5" for="">{{form.nom.label_tag}}</label>
+              {% comment %} <input
+                type="text"
+                class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full"
+                name="nom"
+                placeholder="Entrer votre nom"
+              /> {% endcomment %}
+              {{form.nom}}
+            </div>
+            {% if form.nom.errors %}
+              <p>{{form.nom.errors}}</p>
+            {% endif %}
+            <div class="grid col-span-1 w-full mt-5">
+              <label class="text-[13px] font-bold mb-1.5" for="">{{form.prenom.label_tag}}</label>
+              {% comment %} <input
+                type="text"
+                class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full"
+                name="prenom"
+                placeholder="Entrer votre prenom"
+              /> {% endcomment %}
+              {{form.prenom}}
+            </div>
+          </div>
 
-        
-
-        <main class="flex items-center justify-center bg-gradient-to-r from-gray-50 to-gray-200 h-screen font-poppins">
-
+          <div class="grid grid-cols-2 w-full gap-3">
+            <div class="grid col-span-1 w-full mt-5">
+              <label class="text-[13px] font-bold mb-1.5" for="">{{form.email.label_tag}}</label>
+              {% comment %} <input
+                type="email"
+                class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full"
+                name="email"
+                placeholder="Entrer votre email"
+              /> {% endcomment %}
+              {{form.email}}
+            </div>
             
+            {% if form.email.errors %}
+              <p>{{form.email.errors}}</p>
+            {% endif %}
+              
+            <div class="grid col-span-1 w-full mt-5">
+              <label class="text-[13px] font-bold mb-1.5" for="">{{form.pays.label_tag}}</label>
+              {% comment %} <input
+                type="text"
+                class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full"
+                name="pays"
+                placeholder="Entrer votre pays"
+              /> {% endcomment %}
+              {{form.pays}}
+            </div>
+          </div>
+          {% if form.pays.errors %}
+              <p>{{form.pays.errors}}</p>
+            {% endif %}
+          <div class="grid grid-cols-2 w-full gap-3">
+            <div class="grid col-span-1 w-full mt-5">
+              <label class="text-[13px] font-bold mb-1.5" for="">{{form.phone.label_tag}}</label>
+              {% comment %} <input
+                type="text"
+                class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full"
+                name="phone"
+                placeholder="Entrer votre phone"
+              /> {% endcomment %}
+              {{form.phone}}
+            </div>
+            {% if form.phone.errors %}
+              <p>{{form.phone.errors}}</p>
+            {% endif %}
+            <div class="grid col-span-1 w-full mt-5">
+              <label class="text-[13px] font-bold mb-1.5" for="">{{form.ville.label_tag}}</label>
+              {% comment %} <input
+                type="text"
+                class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full"
+                name="ville"
+                placeholder="Entrer votre ville"
+              /> {% endcomment %}
+              {{form.ville}}
+            </div>
+          </div>
+          <div class="grid grid-cols-2 w-full gap-3">
+            <div class="grid col-span-1 w-full mt-5">
+              <label class="text-[13px] font-bold mb-1.5" for="">{{form.rue.label_tag}}</label>
+              {% comment %} <input
+                type="text"
+                class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full"
+                name="rue"
+                placeholder="Entrer votre rue"
+              /> {% endcomment %}
+              {{form.rue}}
+            </div>
+            <div class="grid col-span-1 w-full mt-5">
+              <label class="text-[13px] font-bold mb-1.5" for=""
+                >{{form.quartier.label_tag}}</label
+              >
+              {% comment %} <input
+                type="text"
+                class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full"
+                name="quartier"
+                placeholder="Entrer votre quartier"
+              /> {% endcomment %}
+              {{form.quartier}}
+            </div>
+          </div>
+          {% comment %} {{form.as_p}} {% endcomment %}
 
-            <form action="{% url 'store_contact' %}" id="formLoginPage" method="POST" 
-                class="flex  shadow-2xl rounded-2xl w-[40%] min-h-[60%] relative overflow-hidden transition-all  duration-2000 ease-linear"
+          <div class="grid grid-cols-2 w-full gap-3">
+            <button
+              class="col-span-1 bg-black mt-8 h-10 font-bold hover:bg-gray-800 text-white text-sm rounded-md w-full"
+              type="submit"
             >
-            
-            {% csrf_token %}
-
-                <div class="custom-shape-divider-bottom-1765470033   absolute top-0 left-0 w-full overflow-hidden">
-                    <svg data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
-                        <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="relative block  fill-black"></path>
-                    </svg>
-                </div>
-
-                <div class="p-16 w-full">
-                    <div class=" flex flex-col items-start w-full  justify-center">
-                        <h1 class="font-bold text-3xl text-right mb-5">Créer un contact</h1>
-
-                        <div class="grid grid-cols-2 relative w-full gap-3">
-                            <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.nom.label_tag}}</label>
-                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="nom" placeholder="Entrer votre nom"> {% endcomment %}
-                                {{form.nom}}
-
-                                
-                                {% if form.nom.errors %}
-                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.nom.errors}}</span>
-                                {% endif %}
-                                    
-                            </div>
-                            <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.prenom.label_tag}}</label>
-                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="prenom" placeholder="Entrer votre prenom"> {% endcomment %}
-
-                                {{form.prenom}}
-
-                                 {% if form.prenom.errors %}
-                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.prenom.errors}}</span>
-                                {% endif %}
-                            </div>
-                        </div>
-
-                        <div class="grid grid-cols-2 w-full gap-3">
-                            <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.email.label_tag}}</label>
-                                {% comment %} <input type="email" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="email" placeholder="Entrer votre email"> {% endcomment %}
-                                {{form.email}}
-
-                                {% if form.email.errors %}
-                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.email.errors}}</span>
-                                {% endif %}
-                            </div>
-                            <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.pays.label_tag}}</label>
-                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="pays" placeholder="Entrer votre pays"> {% endcomment %}
-                                {{form.pays}}
-
-                                {% if form.pays.errors %}
-                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.pays.errors}}</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 w-full gap-3">
-                            <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.phone.label_tag}}</label>
-                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="phone" placeholder="Entrer votre phone"> {% endcomment %}
-                                {{form.phone}}
-
-                                {% if form.phone.errors %}
-                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.phone.errors}}</span>
-                                {% endif %}
-                            </div>
-                            <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.ville.label_tag}}</label>
-                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="ville" placeholder="Entrer votre ville"> {% endcomment %}
-                                {{form.ville}}
-
-                                {% if form.ville.errors %}
-                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.ville.errors}}</span>
-                                {% endif %}
-                            </div>
-                        </div>
-                        <div class="grid grid-cols-2 w-full gap-3">
-                            <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.rue.label_tag}}</label>
-                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="rue" placeholder="Entrer votre rue"> {% endcomment %}
-                                {{form.rue}}
-
-                                {% if form.rue.errors %}
-                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.rue.errors}}</span>
-                                {% endif %}
-                            </div>
-                            <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.quartier.label_tag}}</label>
-                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="quartier" placeholder="Entrer votre quartier"> {% endcomment %}
-                                {{form.quartier}}
-
-                                {% if form.quartier.errors %}
-                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.quartier.errors}}</span>
-                                {% endif %}
-                            </div>
-                            
-                        </div>
-
-                        <div class="grid grid-cols-2 w-full gap-3">
-                            <button class=" col-span-1 bg-black mt-8 h-10 font-bold hover:bg-gray-800 text-white text-sm rounded-md w-full" type="submit">
-                                Sauvegarder
-                            </button>
-                            <a href="{% url 'contact' %}">
-                                <button class="bg-gray-400 col-span-1  mt-8 h-10 font-bold hover:bg-gray-600 text-white text-sm rounded-md w-full" type="button">
-                                    Annuler
-                                </button>
-                            </a>
-                        </div>
-                    
-                    
-                    </div>
-                </div>
-            </form>
-
-        </main>
-    {% endblock content %}
+              Sauvegarder
+            </button>
+            <a href="{% url 'contact' %}">
+              <button
+                class="bg-gray-400 col-span-1 mt-8 h-10 font-bold hover:bg-gray-600 text-white text-sm rounded-md w-full"
+                type="button"
+              >
+                Annuler
+              </button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </form>
+  </main>
+  {% endblock content %}
+</html>
