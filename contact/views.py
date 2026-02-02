@@ -20,7 +20,7 @@ def index(request):
     
     # ---- Pagination -----
     #items = Contact.objects.all().order_by('id') # Get all items
-    paginator = Paginator(Contacts, 500) # 10 items per page
+    paginator = Paginator(Contacts, 5) # 10 items per page
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number) # Get page object for current page
     
