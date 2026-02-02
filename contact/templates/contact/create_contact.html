@@ -41,45 +41,88 @@
                     <div class=" flex flex-col items-start w-full  justify-center">
                         <h1 class="font-bold text-3xl text-right mb-5">Créer un contact</h1>
 
-                        <div class="grid grid-cols-2 w-full gap-3">
+                        <div class="grid grid-cols-2 relative w-full gap-3">
                             <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">Nom</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="nom" placeholder="Entrer votre nom">
+                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.nom.label_tag}}</label>
+                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="nom" placeholder="Entrer votre nom"> {% endcomment %}
+                                {{form.nom}}
+
+                                
+                                {% if form.nom.errors %}
+                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.nom.errors}}</span>
+                                {% endif %}
+                                    
                             </div>
                             <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">Prenom</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="prenom" placeholder="Entrer votre prenom">
+                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.prenom.label_tag}}</label>
+                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="prenom" placeholder="Entrer votre prenom"> {% endcomment %}
+
+                                {{form.prenom}}
+
+                                 {% if form.prenom.errors %}
+                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.prenom.errors}}</span>
+                                {% endif %}
                             </div>
                         </div>
 
                         <div class="grid grid-cols-2 w-full gap-3">
                             <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">Email</label>
-                                <input type="email" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="email" placeholder="Entrer votre email">
+                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.email.label_tag}}</label>
+                                {% comment %} <input type="email" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="email" placeholder="Entrer votre email"> {% endcomment %}
+                                {{form.email}}
+
+                                {% if form.email.errors %}
+                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.email.errors}}</span>
+                                {% endif %}
                             </div>
                             <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">Pays</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="pays" placeholder="Entrer votre pays">
+                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.pays.label_tag}}</label>
+                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="pays" placeholder="Entrer votre pays"> {% endcomment %}
+                                {{form.pays}}
+
+                                {% if form.pays.errors %}
+                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.pays.errors}}</span>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="grid grid-cols-2 w-full gap-3">
                             <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">phone</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="phone" placeholder="Entrer votre phone">
+                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.phone.label_tag}}</label>
+                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="phone" placeholder="Entrer votre phone"> {% endcomment %}
+                                {{form.phone}}
+
+                                {% if form.phone.errors %}
+                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.phone.errors}}</span>
+                                {% endif %}
                             </div>
                             <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">Ville</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="ville" placeholder="Entrer votre ville">
+                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.ville.label_tag}}</label>
+                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="ville" placeholder="Entrer votre ville"> {% endcomment %}
+                                {{form.ville}}
+
+                                {% if form.ville.errors %}
+                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.ville.errors}}</span>
+                                {% endif %}
                             </div>
                         </div>
                         <div class="grid grid-cols-2 w-full gap-3">
                             <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">rue</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="rue" placeholder="Entrer votre rue">
+                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.rue.label_tag}}</label>
+                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="rue" placeholder="Entrer votre rue"> {% endcomment %}
+                                {{form.rue}}
+
+                                {% if form.rue.errors %}
+                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.rue.errors}}</span>
+                                {% endif %}
                             </div>
                             <div class="grid col-span-1 w-full mt-5">
-                                <label class="text-[13px] font-bold mb-1.5" for="">Quartier</label>
-                                <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="quartier" placeholder="Entrer votre quartier">
+                                <label class="text-[13px] font-bold mb-1.5" for="">{{form.quartier.label_tag}}</label>
+                                {% comment %} <input type="text" class="h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full " name="quartier" placeholder="Entrer votre quartier"> {% endcomment %}
+                                {{form.quartier}}
+
+                                {% if form.quartier.errors %}
+                                    <span class="text-red-500 font-medium text-[12px] absolute -bottom-4">{{form.quartier.errors}}</span>
+                                {% endif %}
                             </div>
                             
                         </div>

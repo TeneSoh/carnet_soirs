@@ -795,6 +795,10 @@ input:where([type='file']):focus {
   position: relative;
 }
 
+.-bottom-4 {
+  bottom: -1rem;
+}
+
 .left-0 {
   left: 0px;
 }
@@ -1002,6 +1006,10 @@ input:where([type='file']):focus {
   line-height: 1;
 }
 
+.text-\[12px\] {
+  font-size: 12px;
+}
+
 .text-\[13px\] {
   font-size: 13px;
 }
@@ -1025,12 +1033,21 @@ input:where([type='file']):focus {
   font-weight: 700;
 }
 
+.font-medium {
+  font-weight: 500;
+}
+
 .leading-normal {
   line-height: 1.5;
 }
 
 .tracking-normal {
   letter-spacing: 0em;
+}
+
+.text-red-500 {
+  --tw-text-opacity: 1;
+  color: rgb(239 68 68 / var(--tw-text-opacity, 1));
 }
 
 .text-white {
