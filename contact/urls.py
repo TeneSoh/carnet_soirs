@@ -1,7 +1,9 @@
 from django.urls import path
+from . import views
+from . import views
 
 from contact.views import DetailContactView
-# from .views import index , store , delete , show , edit#, create
+from .views import index #, store , delete , show , edit#, create
 from . import views
 urlpatterns = [
     path('', views.index, name="contact"),

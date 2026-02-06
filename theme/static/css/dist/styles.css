@@ -824,6 +824,11 @@ input:where([type='file']):focus {
   margin-right: auto;
 }
 
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
 .my-auto {
   margin-top: auto;
   margin-bottom: auto;
@@ -855,6 +860,10 @@ input:where([type='file']):focus {
 
 .ml-0 {
   margin-left: 0px;
+}
+
+.ml-1 {
+  margin-left: 0.25rem;
 }
 
 .ml-3 {
@@ -921,12 +930,20 @@ input:where([type='file']):focus {
   min-height: 60%;
 }
 
+.min-h-\[65\%\] {
+  min-height: 65%;
+}
+
 .min-h-screen {
   min-height: 100vh;
 }
 
 .w-8 {
   width: 2rem;
+}
+
+.w-\[35\%\] {
+  width: 35%;
 }
 
 .w-\[40\%\] {
@@ -1261,6 +1278,10 @@ input:where([type='file']):focus {
   line-height: 1;
 }
 
+.text-\[12px\] {
+  font-size: 12px;
+}
+
 .text-\[13px\] {
   font-size: 13px;
 }
@@ -1306,6 +1327,11 @@ input:where([type='file']):focus {
 
 .tracking-normal {
   letter-spacing: 0em;
+}
+
+.text-black {
+  --tw-text-opacity: 1;
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 
 .text-blue-600 {
@@ -1405,6 +1431,10 @@ input:where([type='file']):focus {
   transition-duration: 200ms;
 }
 
+.ease-in-out {
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .ease-linear {
   transition-timing-function: linear;
 }
@@ -1467,6 +1497,10 @@ input:where([type='file']):focus {
 .hover\:text-gray-700:hover {
   --tw-text-opacity: 1;
   color: rgb(55 65 81 / var(--tw-text-opacity, 1));
+}
+
+.hover\:underline:hover {
+  text-decoration-line: underline;
 }
 
 .focus\:border-slate-400:focus {
