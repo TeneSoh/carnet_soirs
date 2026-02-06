@@ -34,6 +34,10 @@
           <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded">Se connecter</button>
           {% comment %} <a href="{% url 'register' %}">Creer un compte</a> {% endcomment %}
         </form>
+        <p class="text-[13px] flex justify-center  mt-5 text-black text-center">
+           Vous n'avez pas de compte ? 
+           <a href="{% url 'register' %}" class="font-bold ml-1 hover:underline"> Creer un compte</a>
+         </p>
       </div>
     </div>
   </body>
