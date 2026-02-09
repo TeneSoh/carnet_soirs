@@ -17,5 +17,4 @@ urlpatterns = [
     path('show-contact/<int:pk>', views.DetailContactView.as_view(), name="show_contact"),
     path('edit-contact/<int:pk>', views.UpdateContactView.as_view(), name="edit_contact"),
     # path('update-contact/<int:id>', update, name="update_contact"),
-    
 ]

@@ -49,6 +49,14 @@ INSTALLED_APPS = [
 
 TAILWIND_APP_NAME = 'theme'
 
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = 'contacts/'
+LOGOUT_REDIRECT_URL = '/'
+
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = 'contacts/'
+LOGOUT_REDIRECT_URL = '/'
+
 NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'
 # NPM_BIN_PATH = config('NPM_BIN_PATH')
 # NPM_BIN_PATH = "C:/Program Files (x86)/nodejs/npm.cmd"
