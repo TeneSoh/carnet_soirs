@@ -53,7 +53,7 @@ TAILWIND_APP_NAME = 'theme'
 AUTH_USER_MODEL = 'users.User'
 
 # AUTH_USER_MODEL = 'auth.User'
-AUTH_USER_MODEL = 'users.User'
+# AUTH_USER_MODEL = 'users.User'
 
 LOGIN_URL = '/'
 LOGIN_REDIRECT_URL = 'contacts/'
