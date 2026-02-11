@@ -45,12 +45,18 @@ INSTALLED_APPS = [
     'contact',
     'account',
     'widget_tweaks',
+    'users'
 ]
 
 TAILWIND_APP_NAME = 'theme'
 
+# AUTH_USER_MODEL = 'auth.user'
+AUTH_USER_MODEL = 'auth.user'
+
+
+
 LOGIN_URL = '/'
-LOGIN_REDIRECT_URL = 'contact'
+LOGIN_REDIRECT_URL = 'contacts/'
 LOGOUT_REDIRECT_URL = '/'
 
 # NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'

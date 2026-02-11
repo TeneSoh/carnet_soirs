@@ -55,7 +55,7 @@ class ContactForm(forms.ModelForm):
             "prenom": "Entrer votre prenom",
             "email": "Entrer votre email",
             "pays" : "Entrer votre pays",
-            "phone" : "Entrer votre Numero de telephone",
+            "phone" : "Votre Numero de telephone",
             "ville": "Entrer votre ville",
             "quartier": "Entrer votre quartier",
             "rue" : "Entre votre rue",
