@@ -3,33 +3,40 @@ from django.contrib.auth import login, logout, authenticate
 from users.forms import LoginForm, RegisterForm
 
 # Create your views here.
-
 def signIn(request):
-    form = LoginForm(request.POST)
+    form = LoginForm()
     if request.method == 'POST':
+        form = LoginForm(request.POST)
         if form.is_valid():
-            username = form.cleaned_data.get('email')
+            email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password')
-            user = authenticate(username=username, password=password)
+            user = authenticate(request, username=email, password=password)
             if user is not None:
                 login(request=request, user=user)
-                return redirect('contact')
-   
-        return render(request=request, template_name='users/login.html', context={'form': form})
-    
-    return render(request=request, template_name='users/login.html', context={'form': form})
 
-def register(request):
-    form = RegisterForm()
-    if request.method == 'POST':
-        form = RegisterForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('login')
-   
-        return render(request=request, template_name='users/register.html', context={'form': form})
+                return redirect('contact')
+
+        return render(request=request, template_name = 'users/login.html', context= {'form': form} )
     
-    return render(request=request, template_name='registration/register.html', context={'form': form}  )
+    return render(request=request, template_name = 'users/login.html', context= {'form': form} )
+
+
+def register(request) :
+    form = RegisterForm()
+    if request.method == "POST":
+        form = RegisterForm(request.POST)
+
+        if form.is_valid():
+            # user = form.save()
+            form.save()
+            # login(request, user)
+
+            return redirect('login')
+
+
+        return render(request , 'registration/register.html', {'form': form})
+    return render(request , 'registration/register.html', {'form': form})
+
 
 def disconnect(request):
     logout(request)
