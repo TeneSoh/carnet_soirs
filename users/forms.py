@@ -1,7 +1,10 @@
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
+# from django.contrib.auth.models import User
 from django import forms
 
+
+User = get_user_model()
 class LoginForm(forms.Form):
     email = forms.EmailField(
         label="Email",
@@ -35,5 +38,5 @@ class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
     phone = forms.CharField(required=True, widget=forms.TextInput())
     class Meta:
-        model = User
+        model = User()
         fields = ['username', 'email', 'phone', 'password1', 'password2']
