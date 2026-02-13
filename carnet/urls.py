@@ -23,4 +23,3 @@ urlpatterns = [
     path('', include('users.urls')),
     path('contacts/', include('contact.urls')),
 ]
-
