@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context_processors import request
 from django.http import Http404
+from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 #from django.views import view
 from contact.models import Contact
 from .forms import ContactForm
@@ -14,8 +16,9 @@ from django.urls import reverse_lazy
 # Using class Views
 
 # Create your views here.
+
 def index(request):
-    Contacts = Contact.objects.all().order_by('-id')
+    Contacts = Contact.objects.filter(user=request.user).order_by('-id')
     
     
     # ---- Pagination -----
@@ -92,7 +95,11 @@ class CreateContactView(View):
     def post(self, request):
         form = ContactForm(request.POST)
         if form.is_valid():
-            form.save()
+            contact = form.save(commit=False)
+            contact.user = request.user
+
+            contact.save()
+
             return redirect("contact")
         
         return render(request, "contact/create_contact.html", {"form": form})
