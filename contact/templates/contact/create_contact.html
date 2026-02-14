@@ -24,7 +24,7 @@
         >
           <path
             d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
-            class="relative block fill-black"
+            class="relative block fill-blue-500"
           ></path>
         </svg>
       </div>
@@ -43,10 +43,14 @@
                 placeholder="Entrer votre nom"
               /> {% endcomment %}
               {{form.nom}}
+
+              
+              {% if form.nom.errors %}
+                  <p class="error text-red-500 font-medium text-[12px]">{{form.nom.errors}}</p>
+              {% endif %}
+                
             </div>
-            {% if form.nom.errors %}
-              <p>{{form.nom.errors}}</p>
-            {% endif %}
+            
             <div class="grid col-span-1 w-full mt-5">
               <label class="text-[13px] font-bold mb-1.5" for="">{{form.prenom.label_tag}}</label>
               {% comment %} <input
@@ -56,6 +60,9 @@
                 placeholder="Entrer votre prenom"
               /> {% endcomment %}
               {{form.prenom}}
+              {% for error in form.prenom.errors %}
+                  <p class="error text-red-500 font-medium text-[12px]">{{ error }}</p>
+              {% endfor %}
             </div>
           </div>
 
@@ -69,11 +76,11 @@
                 placeholder="Entrer votre email"
               /> {% endcomment %}
               {{form.email}}
+              {% for error in form.email.errors %}
+                  <p class="error text-red-500 font-medium text-[12px]">{{ error }}</p>
+              {% endfor %}
             </div>
             
-            {% if form.email.errors %}
-              <p>{{form.email.errors}}</p>
-            {% endif %}
               
             <div class="grid col-span-1 w-full mt-5">
               <label class="text-[13px] font-bold mb-1.5" for="">{{form.pays.label_tag}}</label>
@@ -84,11 +91,12 @@
                 placeholder="Entrer votre pays"
               /> {% endcomment %}
               {{form.pays}}
+              {% for error in form.pays.errors %}
+                  <p class="error text-red-500 font-medium text-[12px]">{{ error }}</p>
+              {% endfor %}
             </div>
           </div>
-          {% if form.pays.errors %}
-              <p>{{form.pays.errors}}</p>
-            {% endif %}
+          
           <div class="grid grid-cols-2 w-full gap-3">
             <div class="grid col-span-1 w-full mt-5">
               <label class="text-[13px] font-bold mb-1.5" for="">{{form.phone.label_tag}}</label>
@@ -99,10 +107,11 @@
                 placeholder="Entrer votre phone"
               /> {% endcomment %}
               {{form.phone}}
+              {% for error in form.phone.errors %}
+                  <p class="error text-red-500 font-medium text-[12px]">{{ error }}</p>
+              {% endfor %}
             </div>
-            {% if form.phone.errors %}
-              <p>{{form.phone.errors}}</p>
-            {% endif %}
+           
             <div class="grid col-span-1 w-full mt-5">
               <label class="text-[13px] font-bold mb-1.5" for="">{{form.ville.label_tag}}</label>
               {% comment %} <input
@@ -112,6 +121,9 @@
                 placeholder="Entrer votre ville"
               /> {% endcomment %}
               {{form.ville}}
+              {% for error in form.ville.errors %}
+                  <p class="error text-red-500 font-medium text-[12px]">{{ error }}</p>
+              {% endfor %}
             </div>
           </div>
           <div class="grid grid-cols-2 w-full gap-3">
@@ -124,6 +136,9 @@
                 placeholder="Entrer votre rue"
               /> {% endcomment %}
               {{form.rue}}
+              {% for error in form.rue.errors %}
+                  <p class="error text-red-500 font-medium text-[12px]">{{ error }}</p>
+              {% endfor %}
             </div>
             <div class="grid col-span-1 w-full mt-5">
               <label class="text-[13px] font-bold mb-1.5" for=""
@@ -136,13 +151,16 @@
                 placeholder="Entrer votre quartier"
               /> {% endcomment %}
               {{form.quartier}}
+              {% for error in form.quartier.errors %}
+                  <p class="error text-red-500 font-medium text-[12px]">{{ error }}</p>
+              {% endfor %}
             </div>
           </div>
           {% comment %} {{form.as_p}} {% endcomment %}
 
           <div class="grid grid-cols-2 w-full gap-3">
             <button
-              class="col-span-1 bg-black mt-8 h-10 font-bold hover:bg-gray-800 text-white text-sm rounded-md w-full"
+              class="col-span-1 bg-blue-500 mt-8 h-10 font-bold hover:bg-blue-600 text-white text-sm rounded-md w-full"
               type="submit"
             >
               Sauvegarder
