@@ -5,7 +5,9 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context_processors import request
 from django.http import Http404
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required 
+from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.utils.decorators import method_decorator
 #from django.views import view
 from contact.models import Contact
 from .forms import ContactForm
@@ -18,9 +20,9 @@ from django.utils.decorators import method_decorator
 
 # Create your views here.
 
-
-@login_required(login_url='login' , redirect_field_name='login') #on l'utilse lorqu'il s'agit de simple function afin de les securiser
+@login_required(login_url='login', redirect_field_name='login')
 def index(request):
+    # Contacts = Contact.objects.all()
     Contacts = Contact.objects.filter(user=request.user).order_by('-id')
     
     
@@ -90,9 +92,7 @@ def index(request):
 #         context = super().get_context_data(**kwargs)
 #         context["form"] = ContactForm()
 #         return context
-
-
-@method_decorator(login_required(login_url='login' , redirect_field_name='login'), name='dispatch') #on l'utilse lorqu'il s'agit de class view afin de les securiser
+@method_decorator(login_required(login_url='login', redirect_field_name='store-contact'), name='dispatch')
 class CreateContactView(View):
     def get(self, request):
         form = ContactForm()
@@ -196,7 +196,7 @@ class UpdateContactView(UpdateView):
 #     except Contact.DoesNotExist:
 #         raise Http404("Pas de contact trouvé")
 
-@method_decorator(login_required(redirect_field_name="login" , login_url='login') , name="dispatch")
+@method_decorator(permission_required(perm='can_delete_contact'), name='dispatch')
 class DeleteContactView(DeleteView):
     model = Contact
     # template_name = "contact/contact_confirm_delete.html"
@@ -227,7 +227,6 @@ class DeleteContactView(DeleteView):
 
 #     return render(request, "contact/show.html", {"contact": contact})
 
-@method_decorator(login_required(login_url="login", redirect_field_name="login") , name="dispatch")
 class DetailContactView(DetailView):
     model = Contact
     template_name = "contact/show.html"

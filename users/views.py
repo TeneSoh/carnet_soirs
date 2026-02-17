@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import permission_required
 from users.forms import LoginForm, RegisterForm
 
 # Create your views here.
@@ -38,7 +38,7 @@ def register(request) :
         return render(request , 'registration/register.html', {'form': form})
     return render(request , 'registration/register.html', {'form': form})
 
-@login_required(login_url='login' , redirect_field_name='login') #on l'utilse lorqu'il s'agit de simple function afin de les securiser
+@permission_required(perm='can_delete_contact')
 def disconnect(request):
     logout(request)
     return redirect('login')
