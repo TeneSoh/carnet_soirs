@@ -1,3 +1,0 @@
-SECRET_KEY = 'django-insecure-(^f$#2p=)vf$joxmebi5yqy8v30z!#%w-we4@5-0v8^a4^!19-'
-NPM_BIN_PATH = 'C:/Program Files (x86)/nodejs/npm.cmd'
-DEBUG = True

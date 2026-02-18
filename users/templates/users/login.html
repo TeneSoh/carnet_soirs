@@ -31,9 +31,13 @@
             <div>
               <label class="block text-gray-700 font-semibold mb-1" for="{{ field.id_for_label }}">{{ field.label }}</label>
               {{ field|add_class:'w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-blue-500' }} 
-              {% if field.errors %}
-                <p class="text-red-500 text-sm mt-1">{{ field.errors }}</p>
-              {% endif %}
+                {% if field.errors %}
+                  <ul class="errors">
+                    <li class="italic text-bold text-red-500">{{ field.errors }}</li>
+                    {% comment %} <p class="text-red-500 text-sm mt-1">{{ field.errors }}</p> {% endcomment %}
+                  </ul>
+                  {% comment %} <p class="text-red-500 text-sm mt-1">{{ field.errors }}</p> {% endcomment %}
+                {% endif %}
             </div>
           {% endfor %}
           <button type="submit" class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded">Se connecter</button>

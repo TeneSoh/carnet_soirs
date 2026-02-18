@@ -33,8 +33,6 @@ class LoginForm(forms.Form):
         "inactive": "Ce compte est inactif.",
     }
 
-
-
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(required=True)
     phone = forms.CharField(required=True, widget=forms.TextInput())
