@@ -233,8 +233,79 @@
                     </tr>
                 {% endfor %}
             </tbody>
+        </table> {% endcomment %}
+
+        <table id="myTable" class="w-full text-sm mt-16 text-left rtl:text-right text-body">
+            <thead class="bg-neutral-secondary-soft border-b border-default">
+                <tr>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Nom
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Prenom
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Email
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Pays
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Phone
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Ville
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Quartier
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Rue
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                
+                {% for contact in page_obj %}
+                    <tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft">
+                        <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                            {{contact.nom}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{contact.prenom}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.email}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.pays}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.phone}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.ville}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.quartier}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.rue}}
+                        </td>
+                        <td class="px-2 py-4 flex gap-4">
+                            <a href="{% url 'edit_contact' contact.id %}"  class="font-medium text-blue-600 hover:underline">Edit</a>
+                            <a href="{% url 'show_contact' contact.id %}"  class="font-medium text-blue-600 hover:underline">Show</a>
+                            <a href="{% url 'delete_contact' contact.id %} " class="font-medium text-blue-600 hover:underline">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                    
+            </tbody>
         </table>
-        
     </div>
     
 

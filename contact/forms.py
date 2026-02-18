@@ -50,6 +50,16 @@ class ContactForm(forms.ModelForm):
     class Meta:
         model = Contact
         fields = ["nom", "prenom", "email", "pays", "phone", "ville", "quartier", "rue"]
+
+        error_messages = {
+            'nom': {
+                'required': "Le nom est obligatoire.",
+            },
+            'email': {
+                'invalid': "Email invalide.",
+            },
+        }
+
         labels = {
             "nom": "Entrer votre nom",
             "prenom": "Entrer votre prenom",
@@ -63,49 +73,49 @@ class ContactForm(forms.ModelForm):
         widgets = {
             "nom":forms.TextInput(
                 attrs={
-                    "class":"nom",
+                    "class":"h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full",
                     "id":"nom"
                 }
             ),
             "prenom":forms.TextInput(
                 attrs={
-                    "class":"prenom",
+                    "class":"h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full",
                     "id":"prenom"
                 }
             ),
             "email":forms.EmailInput(
                 attrs={
-                    "class":"email",
+                    "class":"h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full",
                     "id":"email"
                 }
             ),
             "pays":forms.TextInput(
                 attrs={
-                    "class":"pays",
+                    "class":"h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full",
                     "id":"pays"
                 }
             ),
             "phone":forms.TextInput(
                 attrs={
-                    "class":"phone",
+                    "class":"h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full",
                     "id":"phone"
                 }
             ),
             "ville":forms.TextInput(
                 attrs={
-                    "class":"ville",
+                    "class":"h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full",
                     "id":"ville"
                 }
             ),
             "quartier":forms.TextInput(
                 attrs={
-                    "class":"quartier",
+                    "class":"h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full",
                     "id":"quartier"
                 }
             ),
             "rue":forms.TextInput(
                 attrs={
-                    "class":"rue",
+                    "class":"h-10 border-2 bg-gray-50 text-xs border-gray-300 rounded-md w-full",
                     "id":"rue"
                 }
             ),

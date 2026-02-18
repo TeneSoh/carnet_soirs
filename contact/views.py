@@ -3,9 +3,9 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib import messages
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context_processors import request
-from django.http import Http404, HttpResponse
+from django.http import Http404
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 #from django.views import view
@@ -23,9 +23,11 @@ from django.urls import reverse_lazy
 # Using class Views
 
 # Create your views here.
+
 @login_required(login_url='login', redirect_field_name='login')
 def index(request):
-    Contacts = Contact.objects.filter(user = request.user).order_by('-id')
+    # Contacts = Contact.objects.all()
+    Contacts = Contact.objects.filter(user=request.user).order_by('-id')
     
     
     # ---- Pagination -----
@@ -105,9 +107,9 @@ class CreateContactView(View):
         if form.is_valid():
             contact = form.save(commit=False)
             contact.user = request.user
-            
+
             contact.save()
-            
+
             return redirect("contact")
         
         return render(request, "contact/create_contact.html", {"form": form})
@@ -198,7 +200,7 @@ class UpdateContactView(UpdateView):
 #     except Contact.DoesNotExist:
 #         raise Http404("Pas de contact trouvé")
 
-
+@method_decorator(permission_required(perm='can_delete_contact'), name='dispatch')
 class DeleteContactView(DeleteView):
     model = Contact
     # template_name = "contact/contact_confirm_delete.html"
@@ -228,7 +230,6 @@ class DeleteContactView(DeleteView):
 #     )  # avec ceci pas besoin de mettre des try... except
 
 #     return render(request, "contact/show.html", {"contact": contact})
-
 
 class DetailContactView(DetailView):
     model = Contact
