@@ -38,7 +38,6 @@ def register(request) :
         return render(request , 'registration/register.html', {'form': form})
     return render(request , 'registration/register.html', {'form': form})
 
-@permission_required(perm='can_delete_contact')
 def disconnect(request):
     logout(request)
     return redirect('login')

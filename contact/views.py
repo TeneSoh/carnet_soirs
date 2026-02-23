@@ -20,9 +20,10 @@ from django.urls import reverse_lazy
 # Create your views here.
 
 @login_required(login_url='login', redirect_field_name='login')
+@permission_required(perm='can_view_all_contacts')
 def index(request):
-    # Contacts = Contact.objects.all()
-    Contacts = Contact.objects.filter(user=request.user).order_by('-id')
+    Contacts = Contact.objects.all()
+    # Contacts = Contact.objects.filter(user=request.user).order_by('-id')
     
     
     # ---- Pagination -----
@@ -33,6 +34,22 @@ def index(request):
     
     
     return render(request, "contact/contacts.html", {"contacts": Contacts,  'page_obj': page_obj })
+
+# @login_required(login_url='login', redirect_field_name='login')
+# @permission_required(perm='view_your_contacts')
+# def index2(request):
+#     # Contacts = Contact.objects.all()
+#     Contacts = Contact.objects.filter(user=request.user).order_by('-id')
+    
+    
+#     # ---- Pagination -----
+#     #items = Contact.objects.all().order_by('id') # Get all items
+#     paginator = Paginator(Contacts, 5) # 10 items per page
+#     page_number = request.GET.get('page')
+#     page_obj = paginator.get_page(page_number) # Get page object for current page
+    
+    
+#     return render(request, "contact/contacts.html", {"contacts": Contacts,  'page_obj': page_obj })
 
 
 # def create(request) :
@@ -195,6 +212,7 @@ class UpdateContactView(UpdateView):
 #     except Contact.DoesNotExist:
 #         raise Http404("Pas de contact trouvé")
 
+@method_decorator(login_required(login_url='login', redirect_field_name='store-contact'), name='dispatch')
 @method_decorator(permission_required(perm='can_delete_contact'), name='dispatch')
 class DeleteContactView(DeleteView):
     model = Contact
