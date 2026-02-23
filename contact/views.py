@@ -5,7 +5,7 @@ from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.template.context_processors import request
 from django.http import Http404
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required, permission_required
+from django.contrib.auth.decorators import login_required, permission_required , user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.utils.decorators import method_decorator
 #from django.views import view
@@ -16,10 +16,40 @@ from django.views import View
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 
+"""
+user.has_perm('can_delete_contact') --> pour verifier si l'utilisateur a la permission de supprimer un contact
+user.has_perm('contact.can_delete_contact') --> pour verifier si l'utilisateur a la permission de supprimer un contact en precisant le nom de l'application
+user.has_perm('contact.delete_contact') --> pour verifier si l'utilisateur a la permission de supprimer un contact en precisant le nom de l'application et le nom de la permission
+
+user.all()
+    .add(<perm1> , <perm2> , ...)
+    .remove(<perm1> , <perm2> , ...)
+    .clear()
+    .set([<perm1> , <perm2> , ...]) // pour remplacer les permissions de l'utilisateur par une nouvelle liste de permissions
+
+
+user.groups.set([<group1> , <group2> , ...]) // pour remplacer les groupes de l'utilisateur par une nouvelle liste de groupes
+user.groups.add(<group1> , <group2> , ...) // pour ajouter des groupes à l'utilisateur
+user.groups.remove(<group1> , <group2> , ...) // pour supprimer des groupes de l'utilisateur
+user.groups.clear() // pour supprimer tous les groupes de l'utilisateur
+
+# Récupérer ou créer un groupe
+group, created = Group.objects.get_or_create(name="Managers")
+
+permissions = Permission.objects.get(codename__in=["add_contact", "change_contact", "delete_contact"]) // Récupérer les permissions à partir de leurs codenames
+permission = Permission.objects.get(codename = "add_contact") // Récupérer la permission à partir de son codename
+group.permissions.set(permissions) // Assigner les permissions au groupe
+
+"""
+
+def is_visitor(user) :
+    return user.groups.filter(name='visitor').exists()
+
 # Using class Views
 
 # Create your views here.
 
+# @user_passes_test(is_visitor, login_url='login')
 @login_required(login_url='login', redirect_field_name='login')
 def index(request):
     # Contacts = Contact.objects.all()
@@ -93,6 +123,7 @@ def index(request):
 #         context["form"] = ContactForm()
 #         return context
 @method_decorator(login_required(login_url='login', redirect_field_name='store-contact'), name='dispatch')
+@method_decorator(permission_required(perm='can_add_contact' , raise_exception=True), name='dispatch')
 class CreateContactView(View):
     def get(self, request):
         form = ContactForm()
@@ -196,7 +227,7 @@ class UpdateContactView(UpdateView):
 #     except Contact.DoesNotExist:
 #         raise Http404("Pas de contact trouvé")
 
-@method_decorator(permission_required(perm='can_delete_contact'), name='dispatch')
+@method_decorator(permission_required(perm='can_delete_contact' , raise_exception=True), name='dispatch')
 class DeleteContactView(DeleteView):
     model = Contact
     # template_name = "contact/contact_confirm_delete.html"

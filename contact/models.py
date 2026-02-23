@@ -14,3 +14,9 @@ class Contact(models.Model):
     rue = models.CharField(max_length=255, null=False, blank=False) 
     is_activate = models.BooleanField(null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
+
+
+    class Meta : 
+        permissions = [
+            
+        ]
