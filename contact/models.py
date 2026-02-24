@@ -1,5 +1,6 @@
 from django.db import models
 from users.models import User
+from django.contrib import auth
 # Create your models here.
 
 class Contact(models.Model):
@@ -15,8 +16,8 @@ class Contact(models.Model):
     is_activate = models.BooleanField(null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
 
-
-    class Meta : 
+    class Meta:
         permissions = [
-            
+            ('can_view_all_contacts', 'Peut voir tout les contacts'),
+            ('can_hide_contacts', 'Peut cacher un contacts'),
         ]
