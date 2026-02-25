@@ -1,4 +1,5 @@
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import Group
 # from django.contrib.auth.models import User
 from django.contrib.auth import get_user_model
 
@@ -36,8 +37,36 @@ class LoginForm(forms.Form):
 
 
 class RegisterForm(UserCreationForm):
+
+    ROLES_CHOICES = (
+        ('user', 'User'),
+        ('admin', 'Admin'),
+    )
+
     email = forms.EmailField(required=True)
     phone = forms.CharField(required=True, widget=forms.TextInput())
+    role = forms.ChoiceField(
+        choices=ROLES_CHOICES, 
+        required=True,
+        widget=forms.Select(attrs={
+            "class": "form-control"
+        })
+    )
     class Meta:
         model = User
-        fields = ['username', 'email', 'phone', 'password1', 'password2']
+        fields = ['username', 'email',  'phone' , 'role','password1', 'password2']
+    
+    # def save(self , commit=True):
+    #     user = super().save(commit=False)
+    #     role = self.cleaned_data['role']
+    #     if commit:
+    #         user.save()
+    #         group = Group.objects.get(name=role)
+    #         user.groups.add(group)
+
+            # if role == 'admin':
+            #     admin_group = Group.objects.get(name='admin')
+            #     user.groups.add(admin_group)
+            # else:
+            #     user_group = Group.objects.get(name='user')
+            #     user.groups.add(user_group)

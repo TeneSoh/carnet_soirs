@@ -89,7 +89,6 @@
                     <a href="{% url 'store_contact' %}" class="text-white bg-blue-500 hover:bg-blue-600 rounded-md box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Ajouter un Contact</a>
                 </div>
             {% endif %}
-                
         </div>
     </div>
     
@@ -210,6 +209,13 @@
                     <th scope="col" class="px-6 py-3 font-medium">
                         Rue
                     </th>
+                    
+                    {% if perms.contact.can_view_all_contacts %}
+                        <th scope="col" class="px-6 py-3 font-medium">
+                            Email du createur
+                        </th>
+                    {% endif %}
+                        
                     <th scope="col" class="px-6 py-3 font-medium">
                         Action
                     </th>
@@ -244,6 +250,13 @@
                         <td class="px-6 py-4">
                             {{contact.rue}}
                         </td>
+                        
+                        {% if perms.contact.can_view_all_contacts %}
+                            <td class="px-6 py-4">
+                                {{contact.user.email}}
+                            </td>
+                        {% endif %}
+                            
                         <td class="px-2 py-4 flex gap-4">
                             <a href="{% url 'edit_contact' contact.id %}"  class="font-medium text-blue-600 hover:underline">Edit</a>
                             <a href="{% url 'show_contact' contact.id %}"  class="font-medium text-blue-600 hover:underline">Show</a>

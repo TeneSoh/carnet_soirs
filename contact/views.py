@@ -51,9 +51,16 @@ def is_visitor(user) :
 
 # @user_passes_test(is_visitor, login_url='login')
 @login_required(login_url='login', redirect_field_name='login')
-@permission_required(perm='can_view_all_contacts')
+# @permission_required(perm='can_view_all_contacts')
 def index(request):
-    Contacts = Contact.objects.all()
+
+    user = request.user
+    # is_admin = user.groups.filter(name='admin').exists()
+    # if is_admin: 
+    if request.user.has_perm("contact.can_view_all_contacts"):
+        Contacts = Contact.objects.all()
+    else :
+        Contacts = Contact.objects.filter(user=user , is_active=True).order_by('-id')
     # Contacts = Contact.objects.filter(user=request.user).order_by('-id')
     
     
@@ -64,7 +71,11 @@ def index(request):
     page_obj = paginator.get_page(page_number) # Get page object for current page
     
     
-    return render(request, "contact/contacts.html", {"contacts": Contacts,  'page_obj': page_obj })
+    return render(request, "contact/contacts.html", {
+        # "contacts": Contacts,  
+        'page_obj': page_obj , 
+        # 'is_admin': is_admin 
+        })
 
 # @login_required(login_url='login', redirect_field_name='login')
 # @permission_required(perm='view_your_contacts')
@@ -140,7 +151,7 @@ def index(request):
 #         context["form"] = ContactForm()
 #         return context
 @method_decorator(login_required(login_url='login', redirect_field_name='store-contact'), name='dispatch')
-@method_decorator(permission_required(perm='can_add_contact' , raise_exception=True), name='dispatch')
+@method_decorator(permission_required(perm='contact.can_add_contact' , raise_exception=True), name='dispatch')
 class CreateContactView(View):
     def get(self, request):
         form = ContactForm()
@@ -245,7 +256,7 @@ class UpdateContactView(UpdateView):
 #         raise Http404("Pas de contact trouvé")
 
 @method_decorator(login_required(login_url='login', redirect_field_name='store-contact'), name='dispatch')
-@method_decorator(permission_required(perm='can_delete_contact'), name='dispatch')
+@method_decorator(permission_required(perm='contact.can_delete_contact'), name='dispatch')
 class DeleteContactView(DeleteView):
     model = Contact
     # template_name = "contact/contact_confirm_delete.html"

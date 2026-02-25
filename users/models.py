@@ -22,9 +22,18 @@ class UserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class User(AbstractUser):
+    ROLE_CHOICES = (
+        ('admin', 'Admin'),
+        ('user', 'User'),
+    )
     email = models.EmailField(unique=True)
     phone = models.CharField(max_length=30, blank=True, null=True)
     bio = models.TextField(blank=True, null=True)
+    role = models.CharField(
+        max_length=10,
+        choices=ROLE_CHOICES,
+        default='user'
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = ['username']
