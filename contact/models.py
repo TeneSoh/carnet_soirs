@@ -14,7 +14,8 @@ class Contact(models.Model):
     quartier = models.CharField(max_length=255, null=False, blank=False)
     rue = models.CharField(max_length=255, null=False, blank=False) 
     is_activate = models.BooleanField(null=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
+    # user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='users')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='contacts')
 
     class Meta:
         permissions = [

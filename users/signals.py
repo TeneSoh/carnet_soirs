@@ -26,17 +26,31 @@ def create_roles_and_permissions(sender, **kwargs):
 
     can_hide_contact,_ = Permission.objects.get_or_create(codename='can_hide_contacts',name ='Peut cacher un contacts', content_type = content_type)
 
-    add_contact,_ = Permission.objects.get_or_create(codename='add_contact',name ='Can add contact', content_type = content_type)
+    add_contact,_ = Permission.objects.get_or_create(codename='can_add_contact',name ='Can add contact', content_type = content_type)
 
-    change_contact,_ = Permission.objects.get_or_create(codename='change_contact',name ='Can change contact', content_type = content_type)
+    change_contact,_ = Permission.objects.get_or_create(codename='can_change_contact',name ='Can change contact', content_type = content_type)
 
     admin_groupe.permissions.add(can_view_all_contacts) #type:ignore
-    user_groupe.permissions.add(can_hide_contact) #type:ignore
-    user_groupe.permissions.add(add_contact) #type:ignore
-    user_groupe.permissions.add(change_contact) #type:ignore
+    admin_groupe.permissions.set([can_view_all_contacts, can_hide_contact, add_contact, change_contact]) #type:ignore
+    # user_groupe.permissions.add(can_hide_contact) #type:ignore
+    # user_groupe.permissions.add(add_contact) #type:ignore
+    # user_groupe.permissions.add(change_contact) #type:ignore
  
+# @receiver(post_save, sender=User)
+# def assign_user_to_groupe(sender, instance, created, **kwargs):
+#     if created:
+#         group, _ = Group.objects.get_or_create(name='user')
+#         instance.groups.add(group)
+
 @receiver(post_save, sender=User)
 def assign_user_to_groupe(sender, instance, created, **kwargs):
     if created:
-        group, _ = Group.objects.get_or_create(name='user')
-        instance.groups.add(group)
+        if instance.role == 'admin':
+            admin_group, _ = Group.objects.get_or_create(name='admin')
+            instance.groups.add(admin_group)
+            instance.is_staff = True
+            instance.is_superuser = True
+            instance.save()
+        elif instance.role == 'user':
+            user_group, _ = Group.objects.get_or_create(name='user')
+            instance.groups.add(user_group)
