@@ -1,7 +1,9 @@
 {% extends './layout/base.html' %}
 
 {% block content %}
-    <div>
+
+<!-- component
+<div>
         <p>
             Liste des contacts
         </p>
@@ -37,5 +39,294 @@
                 </tr>
             </tbody>
         </table>
+    -->    
+
+
+<div class="max-w-[90%] mx-auto ">
+
+<!-- component     
+     <div class="block mb-4 mx-auto border-b border-slate-300 pb-2 max-w-[360px]">
+        <a target='_blank' href='https://www.material-tailwind.com/docs/html/table' class='block w-full px-4 py-2 text-center text-slate-700 transition-all '>
+                More components on <b>Material Tailwind</b>.
+            </a>
     </div>
+-->
+
+     {% comment %} <div class=" flex justify-between items-center m-7">
+        <p class="text-2xl font-bold">Liste des Etudiants</p>
+        <a href="{% url 'create' %}" class="text-white bg-blue-800 hover:bg-blue-900 rounded-md box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Ajouter un etudiant</a>
+    </div> {% endcomment %}
+
+    <div class="w-full flex justify-between items-center mb-5 mt-7 pl-3">
+
+        <p class="text-2xl font-bold">Liste des Contacts</p>
+
+        <div class="flex gap-4 items-center">
+            <div class="ml-3">
+                <div class="w-full max-w-sm min-w-[200px] relative">
+                    <div class="relative">
+                        <input
+                        class="bg-white w-full pr-11 h-10 pl-3 py-2 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-200 ease focus:outline-none focus:border-slate-400 hover:border-slate-400 shadow-sm focus:shadow-md"
+                        placeholder="Search for invoice..."
+                        id="myInput"
+                        onkeyup="myFunction()"
+                        />
+
+                        <button
+                        class="absolute h-8 w-8 right-1 top-1 my-auto px-2 flex items-center bg-white rounded "
+                        type="button"
+                        >
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-8 h-8 text-slate-600">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+                        </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            {% if perms.can_add_contact %}
+                <div>
+                    <a href="{% url 'store_contact' %}" class="text-white bg-blue-500 hover:bg-blue-600 rounded-md box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">Ajouter un Contact</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="relative flex flex-col w-full h-full overflow-scroll text-gray-700 bg-white shadow-md rounded-lg bg-clip-border">
+        {% comment %} <table id="myTable" class="p-4 border border-slate-300 w-full text-left table-auto min-w-max">
+            <thead >
+                <tr class="border border-slate-300 bg-slate-100">
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Nom
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Prenom
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Email
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Pays
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Phone
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Ville
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Quartier
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Rue
+                    </p>
+                    </th>
+                    <th class="p-4 ">
+                    <p class="text-sm font-normal leading-none text-slate-900">
+                        Actions
+                    </p>
+                    </th>
+                </tr>
+            </thead>            
+            <tbody>
+                {% for contact in page_obj %}
+                    <tr class="hover:bg-slate-50 border-b border-slate-300">
+                        <td class="p-4 py-5">
+                        <p class="block font-semibold text-sm text-slate-800">{{contact.nom}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="block font-semibold text-sm text-slate-800">{{contact.prenom}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.email}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.pays}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.phone}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.ville}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.quartier}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">{{contact.rue}}</p>
+                        </td>
+                        <td class="p-4 py-5">
+                        <p class="text-sm text-slate-800">
+                                    <a href="{% url 'edit_contact' contact.id %}">Edit</a>
+                                    <a href="{% url 'show_contact' contact.id %}">Show</a>
+                                    <a href="{% url 'delete_contact' contact.id %}">Delete</a>
+                        </p>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table> {% endcomment %}
+
+        <table id="myTable" class="w-full text-sm mt-16 text-left rtl:text-right text-body">
+            <thead class="bg-neutral-secondary-soft border-b border-default">
+                <tr>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Nom
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Prenom
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Email
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Pays
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Phone
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Ville
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Quartier
+                    </th>
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Rue
+                    </th>
+                    
+                    {% if perms.contact.can_view_all_contacts %}
+                        <th scope="col" class="px-6 py-3 font-medium">
+                            Email du createur
+                        </th>
+                    {% endif %}
+                        
+                    <th scope="col" class="px-6 py-3 font-medium">
+                        Action
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                
+                {% for contact in page_obj %}
+                    <tr class="odd:bg-neutral-primary even:bg-neutral-secondary-soft">
+                        <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                            {{contact.nom}}
+                        </th>
+                        <td class="px-6 py-4">
+                            {{contact.prenom}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.email}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.pays}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.phone}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.ville}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.quartier}}
+                        </td>
+                        <td class="px-6 py-4">
+                            {{contact.rue}}
+                        </td>
+                        
+                        {% if perms.contact.can_view_all_contacts %}
+                            <td class="px-6 py-4">
+                                {{contact.user.email}}
+                            </td>
+                        {% endif %}
+                            
+                        <td class="px-2 py-4 flex gap-4">
+                            <a href="{% url 'edit_contact' contact.id %}"  class="font-medium text-blue-600 hover:underline">Edit</a>
+                            <a href="{% url 'show_contact' contact.id %}"  class="font-medium text-blue-600 hover:underline">Show</a>
+                            <a href="{% url 'delete_contact' contact.id %} " class="font-medium text-blue-600 hover:underline">Delete</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                    
+            </tbody>
+        </table>
+    </div>
+    
+
+
+        
+
+               <!-- Barre de Pagination -->
+        <div class="flex items-center justify-between p-4 bg-white border-t border-gray-200" aria-label="Table navigation">
+            <span class="text-sm font-normal text-gray-500">
+                Affichage (de <span class="font-semibold text-gray-900">{{ page_obj.start_index }} - {{ page_obj.end_index }}</span> sur <span class="font-semibold text-gray-900">{{ page_obj.paginator.count }}</span>) -  (Page <span class="font-semibold text-gray-900">{{page_obj.number}}</span> de <span class="font-semibold text-gray-900">{{page_obj.paginator.num_pages}}</span>)
+            </span>
+            <ul class="inline-flex items-center -space-x-px">
+                {% if page_obj.has_previous %}
+                <li>
+                    <a href="?page=1" class="block  ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700">
+                        <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                            Prem
+                        </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page={{ page_obj.previous_page_number }}" class="block ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700">
+                        <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                            Prec
+                        </button>
+                    </a>
+                </li>            
+                {% endif %}
+
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                    <li>
+                        <span class="z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 font-bold">{{ num }}</span>
+                    </li>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                    <li>
+                        <a href="?page={{ num }}" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700">{{ num }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <li>
+                    <a href="?page={{ page_obj.next_page_number }}" class="block leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700">
+                        <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                            Suiv
+                        </button>
+                    </a>
+                </li>
+                <li>
+                    <a href="?page={{ page_obj.paginator.num_pages }}" class="block  leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700">
+                        <button class="px-3 py-1 min-w-9 min-h-9 text-sm font-normal text-slate-500 bg-white border border-slate-200 rounded hover:bg-slate-50 hover:border-slate-400 transition duration-200 ease">
+                            Fin
+                        </button>
+                    </a>
+                </li>            
+                {% endif %}
+            </ul>
+        </div>
+
+</div>
+
 {% endblock content %}

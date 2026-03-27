@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,10 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-(^f$#2p=)vf$joxmebi5yqy8v30z!#%w-we4@5-0v8^a4^!19-'
+# SECRET_KEY = 'django-insecure-(^f$#2p=)vf$joxmebi5yqy8v30z!#%w-we4@5-0v8^a4^!19-'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = config('DEBUG', cast=bool)
 
 ALLOWED_HOSTS = []
 
@@ -40,11 +43,25 @@ INSTALLED_APPS = [
     'tailwind',
     'theme',
     'contact',
+    'account',
+    'widget_tweaks',
+    'users',
 ]
 
 TAILWIND_APP_NAME = 'theme'
+# AUTH_USER_MODEL = 'auth.User'
+AUTH_USER_MODEL = 'users.User'
 
-NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'
+# AUTH_USER_MODEL = 'auth.User'
+# AUTH_USER_MODEL = 'users.User'
+
+LOGIN_URL = '/'
+LOGIN_REDIRECT_URL = 'contacts/'
+LOGOUT_REDIRECT_URL = '/'
+
+# NPM_BIN_PATH = 'C:/Program Files/nodejs/npm.cmd'
+NPM_BIN_PATH = config('NPM_BIN_PATH')
+# NPM_BIN_PATH = "C:/Program Files (x86)/nodejs/npm.cmd"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,6 +72,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
 
 ROOT_URLCONF = 'carnet.urls'
 
